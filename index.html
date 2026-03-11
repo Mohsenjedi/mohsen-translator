@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mohsen app | Real-time Translator</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="background-blobs">
+        <div class="blob blob-1"></div>
+        <div class="blob blob-2"></div>
+        <div class="blob blob-3"></div>
+    </div>
+
+    <main class="app-container">
+        <header>
+            <div class="logo">
+                <span class="icon">🌐</span>
+                <h1>Mohsen app</h1>
+            </div>
+            <p class="subtitle">Live Speech & Text Translation</p>
+        </header>
+
+        <nav class="app-tabs">
+            <button class="tab-btn active" data-tab="voice">Voice</button>
+            <button class="tab-btn" data-tab="text">Text</button>
+            <button class="tab-btn" data-tab="history">History</button>
+        </nav>
+
+        <section class="controls">
+            <div class="language-selection">
+                <div class="select-group">
+                    <label>From</label>
+                    <select id="source-lang-select">
+                        <option value="en" selected>English</option>
+                        <option value="fi">Finnish</option>
+                        <option value="de">German</option>
+                    </select>
+                </div>
+                
+                <button id="swap-langs" class="swap-btn" title="Swap Languages">
+                    <svg viewBox="0 0 24 24" width="20" height="20">
+                        <path fill="currentColor" d="M6.99 11L3 15l3.99 4v-3H14v-2H6.99v-3zM21 9l-3.99-4v3H10v2h7.01v3L21 9z"/>
+                    </svg>
+                </button>
+
+                <div class="select-group">
+                    <label>To</label>
+                    <select id="target-lang-select">
+                        <option value="en">English</option>
+                        <option value="fi" selected>Finnish</option>
+                        <option value="de">German</option>
+                    </select>
+                </div>
+            </div>
+            
+            <div id="voice-interface" class="tab-content active">
+                <div class="video-container">
+                    <video id="webcam" autoplay playsinline muted></video>
+                    <div class="subtitle-overlay">
+                        <p id="subtitle-text">Subtitles will appear here...</p>
+                    </div>
+                    <div class="camera-status" id="camera-status">
+                        <span class="status-icon">📷</span>
+                    </div>
+                </div>
+
+                <div class="voice-controls">
+                    <button id="record-btn" class="record-btn">
+                        <div class="pulse-ring"></div>
+                        <div class="btn-icon">
+                            <svg viewBox="0 0 24 24" width="24" height="24">
+                                <path fill="currentColor" d="M12 14c1.66 0 3-1.34 3-3V5c0-1.66-1.34-3-3-3S9 3.34 9 5v6c0 1.66 1.34 3 3 3z"/>
+                                <path fill="currentColor" d="M17 11c0 2.76-2.24 5-5 5s-5-2.24-5-5H5c0 3.53 2.61 6.43 6 6.92V21h2v-3.08c3.39-.49 6-3.39 6-6.92h-2z"/>
+                            </svg>
+                        </div>
+                        <span id="btn-text">Start Listening</span>
+                    </button>
+                    
+                    <button id="camera-toggle" class="camera-btn" title="Toggle Camera">
+                        <svg viewBox="0 0 24 24" width="24" height="24">
+                            <path fill="currentColor" d="M17 10.5V7c0-.55-.45-1-1-1H4c-.55 0-1 .45-1 1v10c0 .55.45 1 1 1h12c.55 0 1-.45 1-1v-3.5l4 4v-11l-4 4z"/>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+
+            <div id="text-interface" class="tab-content">
+                <div class="text-input-wrapper">
+                    <textarea id="manual-text-input" placeholder="Type something to translate..."></textarea>
+                    <button id="translate-btn" class="translate-btn">Translate</button>
+                </div>
+            </div>
+        </section>
+
+        <section class="translation-display">
+            <div class="card recognition-card">
+                <div class="card-header">
+                    <span class="badge">Original</span>
+                    <span id="source-lang-indicator">English</span>
+                </div>
+                <div class="text-content" id="recognition-text">
+                    <span class="placeholder">Speech will appear here...</span>
+                </div>
+            </div>
+
+            <div class="arrow-down">
+                <svg viewBox="0 0 24 24" width="24" height="24">
+                    <path fill="currentColor" d="M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6 1.41-1.41z"/>
+                </svg>
+            </div>
+
+            <div class="card translation-card">
+                <div class="card-header">
+                    <span class="badge secondary">Translated</span>
+                    <span id="target-lang-indicator">Finnish</span>
+                </div>
+                <div class="text-content" id="translation-text">
+                    <span class="placeholder">Translation will appear here...</span>
+                </div>
+            </div>
+        </section>
+
+            <div id="history-interface" class="tab-content">
+                <div class="history-header">
+                    <h3>Conversation History</h3>
+                    <button id="clear-history" class="clear-btn">Clear All</button>
+                </div>
+                <div id="history-list" class="history-list">
+                    <div class="empty-history">
+                        <p>No translations yet</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <footer>
+            <div class="status-indicator">
+                <span class="dot" id="status-dot"></span>
+                <span id="status-text">Ready</span>
+            </div>
+        </footer>
+    </main>
+
+    <script src="script.js"></script>
+</body>
+</html>
