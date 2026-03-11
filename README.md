@@ -1,5 +1,7 @@
 # Mohsen App - Live Voice & Text Translator 🌐
 
+**👉 [View Live Demo](https://Mohsenjedi.github.io/mohsen-translator/)**
+
 Mohsen App is a premium, real-time translation web application featuring live webcam subtitles, voice recognition, and manual text translation. It supports English, Finnish, and German with a sleek, modern UX.
 
 ## ✨ Features
