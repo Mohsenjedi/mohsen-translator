@@ -15,7 +15,7 @@ Mohsen App is a premium, real-time translation web application featuring live we
 ## 🚀 Live Demo
 
 Check out the live application here:
-**[Mohsen App Live Demo](https://mohsen-translator.vercel.app)** *(Note: Replace with your actual deployment link once hosted)*
+**[Mohsen App Live Demo](https://Mohsenjedi.github.io/mohsen-translator/)**
 
 ## 🛠️ Technology Stack
 
